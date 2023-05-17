@@ -1,0 +1,37 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: check blind reviews
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    # UTC时间对应9点-22点
+    - cron: 分钟 1-14 * * *
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install requirements
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install requests BeautifulSoup4 lxml
+    - name: Check
+      run: |
+        python3 getReviews-github.py
+      env:
+        USER: ${{ secrets.USER }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        PUSHKEY: ${{ secrets.PUSHKEY }}
+        DAVUSR: ${{ secrets.DAVUSR }}
+        DAVPWD: ${{ secrets.DAVPWD }}
+        DAVPATH: ${{ secrets.DAVPATH }}
