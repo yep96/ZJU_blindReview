@@ -1,5 +1,7 @@
 # 浙大硕士学位论文盲审意见轮询
 
+![希望大家都顺利毕业](https://github.com/yep96/ZJU_blindReview/blob/main/lucky.gif)
+
 自动化监测学位论文的意见，若有增加则通过[pushplus](https://www.pushplus.plus/)推送至微信。脚本保存session减少重复登录，保存推送记录避免相同信息重复推送
 
 由于暂未找到长时间保持登录状态的方法，使用时必须输入统一认证密码，同时脚本保存的session权限较高，因此不建议代挂机
@@ -10,7 +12,7 @@
 可以部署在实验室/腾讯/阿里/境外等服务器上，所有资源均在本地，执行任务和ip都更稳定，建议优先选择这种方法
 
 1. 安装Python3环境
-2. 安装requests, BeautifulSoup4包 `python3 -m pip install requests, BeautifulSoup4 lxml`
+2. 安装requests, BeautifulSoup4包 `python3 -m pip install requests BeautifulSoup4 lxml`
 3. 注册[pushplus](https://www.pushplus.plus/)推送平台并获取token
 4. 下载getReviews-local.py，并修改代码最后部分的个人信息以及脚本所在路径（在Windows上路径也需要用`/`连接）
 5. 添加定时任务`crontab -e`，新增一行`分钟 9-22 * * * path/python3 path/getReviews-local.py`（Windows用`任务计划程序`）。注意查看服务器的时区，如果不是UTC+8则更改9-22为对应的小时，一般为`1-14`。`分钟`自己随便写一个0到59之间的数字，即在9-22点的第几分钟分钟自动执行脚本
